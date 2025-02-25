@@ -20,6 +20,6 @@ eureka:
 
   client:
     serviceUrl:
-      defaultZone:  http://eureka-server:8766/eureka
+      defaultZone:  http://localhost:8721/eureka
     fetch-registry: true
     register-with-eureka: true

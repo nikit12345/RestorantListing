@@ -1,0 +1,49 @@
+version: "3.8"
+
+services:
+  # MySQL Database
+  mysql-db:
+    image: mysql:8.4
+    container_name: mysql-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: udemy-db
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: root
+    ports:
+      - "3307:3306"
+    networks:
+      - restorant-network
+
+  # Eureka Server
+  eureka-server:
+    image: nikitamane/eurekaserver  # Replace with your actual Eureka image
+    container_name: eureka-server
+    restart: always
+    ports:
+      - "8721:8721"
+    networks:
+      - restorant-network
+
+  # Spring Boot Application
+  restorantlisting:
+    image: nikitamane/restorantlisting
+    container_name: restorantlisting
+    restart: always
+    depends_on:
+      - mysql-db
+      - eureka-server
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/udemy-db?useSSL=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: root
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8721/eureka
+    ports:
+      - "1010:9090"
+    networks:
+      - restorant-network
+
+networks:
+  restorant-network:
+    driver: bridge
