@@ -22,7 +22,7 @@ services:
     container_name: eureka-server
     restart: always
     ports:
-      - "8721:8721"
+      - "8721:8761"
     networks:
       - restorant-network
 
@@ -38,7 +38,7 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/udemy-db?useSSL=false&allowPublicKeyRetrieval=true
       SPRING_DATASOURCE_USERNAME: admin
       SPRING_DATASOURCE_PASSWORD: root
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8721/eureka
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka
     ports:
       - "1010:9090"
     networks:
