@@ -1,6 +1,6 @@
 
 FROM openjdk:17-alpine
-EXPOSE 9090
+EXPOSE 9093
 
 WORKDIR	/opt
 COPY target/*jar /opt/restorantlisting.jar
