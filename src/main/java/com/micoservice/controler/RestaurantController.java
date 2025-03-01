@@ -18,7 +18,7 @@ import com.micoservice.service.RestaurantService;
 
 @RestController
 @RequestMapping("/restaurant")
-@CrossOrigin(origins = "http://localhost:4000")
+@CrossOrigin(origins = "*")
 public class RestaurantController {
 
     @Autowired
